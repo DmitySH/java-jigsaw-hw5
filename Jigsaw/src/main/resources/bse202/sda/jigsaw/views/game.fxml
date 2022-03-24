@@ -2,10 +2,9 @@
 
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.GridPane?>
 
 <?import java.net.URL?>
+<?import bse202.sda.jigsaw.models.fxml.Field?>
 <StackPane
         xmlns:fx="http://javafx.com/fxml"
         fx:controller="bse202.sda.jigsaw.controllers.GameController">
@@ -13,66 +12,11 @@
         <URL value="@css/styles.css"/>
     </stylesheets>
     <VBox fx:id="vb" prefWidth="450" maxWidth="450" minWidth="450">
-        <GridPane id="field" fx:id="field">
+        <Field fx:id="field" id="field" rows="9" columns="9">
 
-
-        </GridPane>
+        </Field>
     </VBox>
 </StackPane>
 
-        <!--<BorderPane fx:controller="bse202.sda.jigsaw.controllers.GameController"-->
-        <!--            xmlns:fx="http://javafx.com/fxml">-->
-        <!--    <center>-->
-        <!--        <Group>-->
-        <!--            <Rectangle  width="30" height="30">-->
-
-        <!--            </Rectangle>-->
-        <!--            <Rectangle width="30" height="30">-->
-
-        <!--            </Rectangle>-->
-        <!--            <Rectangle width="30" height="30">-->
-
-        <!--            </Rectangle>-->
-        <!--        </Group>-->
-
-        <!--&lt;!&ndash;        <GridPane xmlns:fx="http://javafx.com/fxml"&ndash;&gt;-->
-        <!--&lt;!&ndash;                  alignment="center"&ndash;&gt;-->
-        <!--&lt;!&ndash;                  gridLinesVisible="true">&ndash;&gt;-->
-        <!--&lt;!&ndash;            <columnConstraints>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <ColumnConstraints percentWidth="100"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <ColumnConstraints percentWidth="100"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <ColumnConstraints percentWidth="100"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <ColumnConstraints percentWidth="100"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <ColumnConstraints percentWidth="100"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <ColumnConstraints percentWidth="100"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;            </columnConstraints>&ndash;&gt;-->
-        <!--&lt;!&ndash;            <rowConstraints>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <RowConstraints percentHeight="100"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <RowConstraints percentHeight="100"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <RowConstraints percentHeight="100"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <RowConstraints percentHeight="100"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <RowConstraints percentHeight="100"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <RowConstraints percentHeight="100"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;            </rowConstraints>&ndash;&gt;-->
-        <!--&lt;!&ndash;            <Text text="java-Buddy"&ndash;&gt;-->
-        <!--&lt;!&ndash;                  GridPane.columnIndex="0" GridPane.rowIndex="0"&ndash;&gt;-->
-        <!--&lt;!&ndash;                  GridPane.columnSpan="2"/>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;            <Label text="Who are you?"&ndash;&gt;-->
-        <!--&lt;!&ndash;                   GridPane.columnIndex="0" GridPane.rowIndex="1"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;            &ndash;&gt;-->
-
-        <!--&lt;!&ndash;            <Button id="button" text="Click Me!"&ndash;&gt;-->
-        <!--&lt;!&ndash;                    onAction="#handleButtonAction" fx:id="button"&ndash;&gt;-->
-        <!--&lt;!&ndash;                    GridPane.columnIndex="0" GridPane.rowIndex="2"/>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;            <Label id="label" fx:id="label"&ndash;&gt;-->
-        <!--&lt;!&ndash;                   GridPane.columnIndex="1" GridPane.rowIndex="2"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;            <BorderPane.margin>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <Insets topRightBottomLeft="50"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;            </BorderPane.margin>&ndash;&gt;-->
-        <!--&lt;!&ndash;        </GridPane>&ndash;&gt;-->
-        <!--    </center>-->
-        <!--</BorderPane>-->
 
 
