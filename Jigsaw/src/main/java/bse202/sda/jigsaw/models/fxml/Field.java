@@ -67,6 +67,7 @@ public class Field extends GridPane {
                 box.addEventFilter(MouseDragEvent.MOUSE_DRAG_RELEASED, e -> {
                     System.out.println("Set on " + finalI + "  " + finalJ);
                     System.out.println(draggedNode.get());
+                    box.setFill(Color.GREENYELLOW);
                 });
 
                 this.add(box, i, j);
