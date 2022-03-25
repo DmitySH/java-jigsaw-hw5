@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 
 <?import java.net.URL?>
 <?import bse202.sda.jigsaw.models.fxml.Field?>
-<StackPane
-        xmlns:fx="http://javafx.com/fxml"
-        fx:controller="bse202.sda.jigsaw.controllers.GameController">
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="mainBox"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="bse202.sda.jigsaw.controllers.GameController">
     <stylesheets>
         <URL value="@css/styles.css"/>
     </stylesheets>
-    <VBox fx:id="vb" prefWidth="450" maxWidth="450" minWidth="450">
+    <StackPane fx:id="pane" prefWidth="450" maxWidth="450" minWidth="450" maxHeight="450">
         <Field fx:id="field" id="field" rows="9" columns="9">
 
         </Field>
-    </VBox>
-</StackPane>
+    </StackPane>
+</Pane>
 
 
 

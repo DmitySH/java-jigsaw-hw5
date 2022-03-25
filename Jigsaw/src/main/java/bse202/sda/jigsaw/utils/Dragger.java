@@ -22,9 +22,12 @@ public class Dragger {
     private EventHandler<MouseEvent> setAnchor;
     private EventHandler<MouseEvent> updatePositionOnDrag;
     private EventHandler<MouseEvent> commitPositionOnRelease;
+    private EventHandler<MouseEvent> dragDetected;
 
     private State cycleState = State.INACTIVE;
     private BooleanProperty isDraggable;
+
+    private static Node lastDragged;
 
     public Dragger(Node target) {
         this(target, true);
@@ -38,6 +41,13 @@ public class Dragger {
     }
 
     private void createHandlers() {
+        dragDetected = event -> {
+            System.out.println("started");
+            target.startFullDrag();
+            lastDragged = target;
+            event.consume();
+        };
+
         setAnchor = event -> {
             if (event.isPrimaryButtonDown()) {
                 cycleState = State.ACTIVE;
@@ -46,7 +56,8 @@ public class Dragger {
                 anchorY = event.getSceneY();
                 mouseOffsetFromNodeZeroX = event.getX();
                 mouseOffsetFromNodeZeroY = event.getY();
-                System.out.println(mouseOffsetFromNodeZeroX);
+                target.setMouseTransparent(true);
+                event.consume();
             }
             if (event.isSecondaryButtonDown()) {
                 cycleState = State.INACTIVE;
@@ -69,6 +80,8 @@ public class Dragger {
 
                 target.setTranslateX(0);
                 target.setTranslateY(0);
+                System.out.println(event.getSceneX() + "  " + event.getSceneY());
+                target.setMouseTransparent(false);
             }
         };
     }
@@ -80,10 +93,12 @@ public class Dragger {
                 target.addEventFilter(MouseEvent.MOUSE_PRESSED, setAnchor);
                 target.addEventFilter(MouseEvent.MOUSE_DRAGGED, updatePositionOnDrag);
                 target.addEventFilter(MouseEvent.MOUSE_RELEASED, commitPositionOnRelease);
+                target.addEventFilter(MouseEvent.DRAG_DETECTED, dragDetected);
             } else {
                 target.removeEventFilter(MouseEvent.MOUSE_PRESSED, setAnchor);
                 target.removeEventFilter(MouseEvent.MOUSE_DRAGGED, updatePositionOnDrag);
                 target.removeEventFilter(MouseEvent.MOUSE_RELEASED, commitPositionOnRelease);
+                target.removeEventFilter(MouseEvent.DRAG_DETECTED, dragDetected);
             }
         });
     }
@@ -98,5 +113,9 @@ public class Dragger {
 
     public void setDraggableProperty(boolean value) {
         isDraggable.set(value);
+    }
+
+    public static Node getLastDragged(){
+        return lastDragged;
     }
 }

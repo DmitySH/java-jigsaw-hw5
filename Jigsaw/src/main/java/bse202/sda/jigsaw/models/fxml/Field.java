@@ -3,11 +3,19 @@ package bse202.sda.jigsaw.models.fxml;
 import javafx.beans.NamedArg;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.util.function.Supplier;
+
 public class Field extends GridPane {
+    public Supplier<Node> draggedNode;
+
     private IntegerProperty rows;
 
     public IntegerProperty rowsProperty() {
@@ -51,6 +59,16 @@ public class Field extends GridPane {
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getColumns(); j++) {
                 Rectangle box = new Rectangle(50, 50, Color.GRAY);
+
+                int finalI = i;
+                int finalJ = j;
+                box.addEventFilter(MouseDragEvent.MOUSE_DRAG_ENTERED,
+                        e -> System.out.println(finalI + "  " + finalJ));
+                box.addEventFilter(MouseDragEvent.MOUSE_DRAG_RELEASED, e -> {
+                    System.out.println("Set on " + finalI + "  " + finalJ);
+                    System.out.println(draggedNode.get());
+                });
+
                 this.add(box, i, j);
             }
         }
