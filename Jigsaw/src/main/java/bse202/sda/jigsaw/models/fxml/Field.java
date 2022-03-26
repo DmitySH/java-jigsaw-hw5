@@ -60,8 +60,6 @@ public class Field extends GridPane {
         setRows(rows);
         setColumns(columns);
         grid = new ArrayList<>();
-        for (int i = 0; i < rows; i++) {
-        }
 
         this.setSnapToPixel(false);
         for (int i = 0; i < getRows(); i++) {
@@ -76,12 +74,12 @@ public class Field extends GridPane {
                 box.addEventFilter(MouseDragEvent.MOUSE_DRAG_RELEASED, e -> {
                     System.out.println("Set on " + finalI + "  " + finalJ);
                     System.out.println(draggedNode.get());
-                    if (draggedNode.get().getClass().equals(Figure.class)){
+                    if (draggedNode.get().getClass().equals(Figure.class)) {
                         Figure fig = (Figure) draggedNode.get();
-//                        grid.get(finalI).get(finalJ).setFill(Color.GREENYELLOW);
-                        for (IntPoint point: fig.getClickedRectangleCoordinates()) {
+                        for (IntPoint point : fig.getClickedRectangleCoordinates()) {
                             grid.get(finalI + point.getX())
                                     .get(finalJ + point.getY()).setFill(Color.GREENYELLOW);
+                            System.out.println(finalI + point.getX() + "  " + finalJ + point.getY());
                         }
                     }
                 });

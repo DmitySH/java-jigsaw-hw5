@@ -1,7 +1,7 @@
 package bse202.sda.jigsaw.models.fxml;
 
 import bse202.sda.jigsaw.utils.IntPoint;
-import javafx.geometry.Point2D;
+import bse202.sda.jigsaw.utils.Rotater2D;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -18,6 +18,11 @@ public class Figure extends Group {
         SECOND,
         THIRD,
         FOURTH,
+    }
+
+    public static Rotater2D rotater;
+    static {
+        rotater = new Rotater2D();
     }
 
     private final int rectSize;
@@ -37,14 +42,26 @@ public class Figure extends Group {
             case SECOND -> {
                 figureFirst();
                 setRotate(90);
+                for (IntPoint point :
+                        coordinates.values()) {
+                    rotater.rotate(90, point);
+                }
             }
             case THIRD -> {
                 figureFirst();
                 setRotate(180);
+                for (IntPoint point :
+                        coordinates.values()) {
+                    rotater.rotate(180, point);
+                }
             }
             case FOURTH -> {
                 figureFirst();
                 setRotate(270);
+                for (IntPoint point :
+                        coordinates.values()) {
+                    rotater.rotate(270, point);
+                }
             }
         }
     }
