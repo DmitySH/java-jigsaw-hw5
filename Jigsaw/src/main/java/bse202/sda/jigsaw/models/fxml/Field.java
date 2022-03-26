@@ -1,5 +1,6 @@
 package bse202.sda.jigsaw.models.fxml;
 
+import bse202.sda.jigsaw.utils.IntPoint;
 import javafx.beans.NamedArg;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -11,9 +12,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class Field extends GridPane {
+    private List<List<Rectangle>> grid;
     public Supplier<Node> draggedNode;
 
     private IntegerProperty rows;
@@ -55,8 +59,13 @@ public class Field extends GridPane {
         super();
         setRows(rows);
         setColumns(columns);
+        grid = new ArrayList<>();
+        for (int i = 0; i < rows; i++) {
+        }
+
         this.setSnapToPixel(false);
         for (int i = 0; i < getRows(); i++) {
+            grid.add(new ArrayList<>());
             for (int j = 0; j < getColumns(); j++) {
                 Rectangle box = new Rectangle(50, 50, Color.GRAY);
 
@@ -67,9 +76,16 @@ public class Field extends GridPane {
                 box.addEventFilter(MouseDragEvent.MOUSE_DRAG_RELEASED, e -> {
                     System.out.println("Set on " + finalI + "  " + finalJ);
                     System.out.println(draggedNode.get());
-                    box.setFill(Color.GREENYELLOW);
+                    if (draggedNode.get().getClass().equals(Figure.class)){
+                        Figure fig = (Figure) draggedNode.get();
+//                        grid.get(finalI).get(finalJ).setFill(Color.GREENYELLOW);
+                        for (IntPoint point: fig.getClickedRectangleCoordinates()) {
+                            grid.get(finalI + point.getX())
+                                    .get(finalJ + point.getY()).setFill(Color.GREENYELLOW);
+                        }
+                    }
                 });
-
+                grid.get(grid.size() - 1).add(box);
                 this.add(box, i, j);
             }
         }

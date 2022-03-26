@@ -23,7 +23,8 @@ public class Figure extends Group {
     private final int rectSize;
     private final Color rectColor;
 
-    private HashMap<Rectangle, IntPoint> coordinates;
+    private final HashMap<Rectangle, IntPoint> coordinates;
+    private List<IntPoint> clickedRectangleCoordinates;
 
     public Figure(FigureType type, int size, Color color) {
         super();
@@ -70,14 +71,23 @@ public class Figure extends Group {
         r.setStrokeWidth(2);
         r.setStroke(Color.RED);
         r.addEventFilter(MouseEvent.MOUSE_PRESSED,
-                e -> calculateCoordinates(r));
+                e -> calculateCoordinatesFromRectangle(r));
         return r;
     }
 
-    private void calculateCoordinates(Rectangle r){
-        IntPoint root = coordinates.get(r);
-        List<String> list = new ArrayList<IntPoint>(
-                coordinates.values().stream().map(x -> ));
+    private void calculateCoordinatesFromRectangle(Rectangle r){
+        IntPoint root =  new IntPoint(coordinates.get(r));
+        List<IntPoint> list = new ArrayList<>(coordinates.values());
+
+        for (IntPoint point : list) {
+            point.setX(point.getX() - root.getX());
+            point.setY(point.getY() - root.getY());
+        }
+
+        clickedRectangleCoordinates = list;
     }
 
+    public List<IntPoint> getClickedRectangleCoordinates() {
+        return clickedRectangleCoordinates;
+    }
 }
