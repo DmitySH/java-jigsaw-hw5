@@ -42,6 +42,9 @@ public class Dragger {
 
     private void createHandlers() {
         dragDetected = event -> {
+            if (event.isSecondaryButtonDown()){
+                return;
+            }
             System.out.println("started");
             target.startFullDrag();
             lastDragged = target;
