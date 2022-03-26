@@ -3,11 +3,8 @@ package bse202.sda.jigsaw.utils;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
-
-import java.util.ArrayList;
 
 public class Dragger {
     private enum State {
@@ -60,6 +57,7 @@ public class Dragger {
                 mouseOffsetFromNodeZeroX = event.getX();
                 mouseOffsetFromNodeZeroY = event.getY();
                 target.setMouseTransparent(true);
+                changeParentsTransparent(true);
             }
             if (event.isSecondaryButtonDown()) {
                 cycleState = State.INACTIVE;
@@ -84,6 +82,7 @@ public class Dragger {
                 target.setTranslateY(0);
                 System.out.println(event.getSceneX() + "  " + event.getSceneY());
                 target.setMouseTransparent(false);
+                changeParentsTransparent(false);
             }
         };
     }
@@ -117,7 +116,15 @@ public class Dragger {
         isDraggable.set(value);
     }
 
-    public static Node getLastDragged(){
+    public static Node getLastDragged() {
         return lastDragged;
+    }
+
+    private void changeParentsTransparent(boolean isTransparent) {
+        Node parent = target.getParent();
+        while (parent.getParent() != null) {
+            parent.setMouseTransparent(isTransparent);
+            parent = parent.getParent();
+        }
     }
 }
