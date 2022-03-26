@@ -6,6 +6,7 @@ import bse202.sda.jigsaw.utils.Dragger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
@@ -20,7 +21,9 @@ public class GameController implements Initializable {
     public Pane pane;
 
     @FXML
-    public Pane mainBox;
+    public VBox mainBox;
+    @FXML
+    public Pane figuresSpawn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -33,9 +36,8 @@ public class GameController implements Initializable {
         Dragger dg2 = new Dragger(f2);
         Dragger dg3 = new Dragger(f3);
 
-        mainBox.getChildren().add(f1);
-        mainBox.getChildren().add(f2);
-        mainBox.getChildren().add(f3);
-
+        figuresSpawn.getChildren().add(f1);
+        figuresSpawn.getChildren().add(f2);
+        figuresSpawn.getChildren().add(f3);
     }
 }

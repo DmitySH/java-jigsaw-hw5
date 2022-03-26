@@ -13,7 +13,7 @@ public class JigsawGame extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(
                 JigsawGame.class.getResource("views/game.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        Scene scene = new Scene(fxmlLoader.load(), 1240, 980);
         scene.getStylesheets().add(Objects.requireNonNull(JigsawGame.class
                 .getResource("views/css/styles.css")).toExternalForm());
         stage.setTitle("Jigsaw By DmitriySH");
