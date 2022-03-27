@@ -50,10 +50,29 @@ public class Field extends GridPane {
         return columns == null ? 0 : columns.get();
     }
 
-    public Field(@NamedArg("rows") int rows, @NamedArg("columns") int columns) {
+    private IntegerProperty cellSize;
+
+    public IntegerProperty cellSizeProperty() {
+        if (this.cellSize == null) {
+            cellSize = new SimpleIntegerProperty();
+        }
+        return cellSize;
+    }
+
+    public void setCellSize(int value) {
+        cellSizeProperty().set(value);
+    }
+
+    public int getCellSize() {
+        return cellSize == null ? 0 : cellSize.get();
+    }
+
+    public Field(@NamedArg("rows") int rows, @NamedArg("columns") int columns,
+                 @NamedArg("cellSize") int cellSize) {
         super();
         setRows(rows);
         setColumns(columns);
+        setCellSize(cellSize);
         grid = new ArrayList<>();
 
         this.setSnapToPixel(false);
@@ -64,7 +83,7 @@ public class Field extends GridPane {
         for (int i = 0; i < getRows(); i++) {
             grid.add(new ArrayList<>());
             for (int j = 0; j < getColumns(); j++) {
-                Cell box = new Cell(new IntPoint(i, j), 50, 50,
+                Cell box = new Cell(new IntPoint(i, j), getCellSize(), getCellSize(),
                         Color.GRAY, Color.GREENYELLOW, this);
 
                 grid.get(grid.size() - 1).add(box);

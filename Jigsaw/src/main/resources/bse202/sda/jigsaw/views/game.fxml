@@ -16,8 +16,8 @@
     <stylesheets>
         <URL value="@css/styles.css"/>
     </stylesheets>
-    <Pane fx:id="pane" prefWidth="450" maxWidth="450" minWidth="450" maxHeight="450">
-        <Field fx:id="field" id="field" rows="9" columns="9"/>
+    <Pane fx:id="pane" prefWidth="540" maxWidth="540" minWidth="540" maxHeight="540">
+        <Field fx:id="field" id="field" rows="9" columns="9" cellSize="60"/>
     </Pane>
     <HBox fx:id="figuresSpawn"
           style="-fx-spacing: 70; -fx-background-color: red"
