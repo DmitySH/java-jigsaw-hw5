@@ -1,5 +1,6 @@
 package bse202.sda.jigsaw.models.fxml;
 
+import bse202.sda.jigsaw.interfaces.CoordinateTransfer;
 import bse202.sda.jigsaw.utils.IntPoint;
 import bse202.sda.jigsaw.utils.Rotater2D;
 import javafx.scene.Group;
@@ -11,8 +12,9 @@ import javafx.scene.shape.StrokeType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
-public class Figure extends Group {
+public class Figure extends Group implements CoordinateTransfer {
     public enum FigureType {
         FIRST,
         SECOND,
@@ -21,6 +23,7 @@ public class Figure extends Group {
     }
 
     public static Rotater2D rotater;
+
     static {
         rotater = new Rotater2D();
     }
@@ -70,14 +73,14 @@ public class Figure extends Group {
         for (int i = 0; i < 3; i++) {
             Rectangle r = createRectangle();
             r.setY(rectSize * i);
-            coordinates.put(r, new IntPoint((int)r.getX() / rectSize,
-                    (int)r.getY() / rectSize));
+            coordinates.put(r, new IntPoint((int) r.getX() / rectSize,
+                    (int) r.getY() / rectSize));
             this.getChildren().add(r);
         }
         Rectangle r = createRectangle();
         r.setX(rectSize);
-        coordinates.put(r, new IntPoint((int)r.getX() / rectSize,
-                (int)r.getY() / rectSize));
+        coordinates.put(r, new IntPoint((int) r.getX() / rectSize,
+                (int) r.getY() / rectSize));
 
         this.getChildren().add(r);
     }
@@ -92,8 +95,8 @@ public class Figure extends Group {
         return r;
     }
 
-    private void calculateCoordinatesFromRectangle(Rectangle r){
-        IntPoint root =  new IntPoint(coordinates.get(r));
+    private void calculateCoordinatesFromRectangle(Rectangle r) {
+        IntPoint root = new IntPoint(coordinates.get(r));
         List<IntPoint> list = new ArrayList<>(coordinates.values());
 
         for (IntPoint point : list) {
@@ -104,7 +107,8 @@ public class Figure extends Group {
         clickedRectangleCoordinates = list;
     }
 
-    public List<IntPoint> getClickedRectangleCoordinates() {
-        return clickedRectangleCoordinates;
+    @Override
+    public Optional<List<IntPoint>> transferCoordinates() {
+        return Optional.of(clickedRectangleCoordinates);
     }
 }
