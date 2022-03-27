@@ -16,6 +16,9 @@ public class Cell extends Rectangle {
     private BooleanProperty isFilled;
     private final Color initialColor;
     private final Color filledColor;
+    private final Color dangerColor;
+    private final Color intersectColor;
+
 
     public Action onFigurePlaced;
 
@@ -40,13 +43,16 @@ public class Cell extends Rectangle {
     }
 
     public Cell(IntPoint coordinates, double v, double v1,
-                Color initialColor, Color filledColor, Field field) {
+                Color initialColor, Color filledColor, Color dangerColor, Color intersectColor, Field field) {
         super(v, v1, initialColor);
 
-        CellDragHandler dragHandler = new CellDragHandler(field, coordinates, Color.PINK);
+        CellDragHandler dragHandler = new CellDragHandler(field, coordinates);
 
         this.initialColor = initialColor;
         this.filledColor = filledColor;
+        this.dangerColor = dangerColor;
+        this.intersectColor = intersectColor;
+
         this.addEventHandler(MouseDragEvent.MOUSE_DRAG_RELEASED,
                 dragHandler::OnDragReleased
         );
@@ -61,12 +67,10 @@ public class Cell extends Rectangle {
     private class CellDragHandler {
         private final Field field;
         private final IntPoint coordinates;
-        private final Color dangerColor;
 
-        public CellDragHandler(Field field, IntPoint coordinates, Color dangerColor) {
+        public CellDragHandler(Field field, IntPoint coordinates) {
             this.field = field;
             this.coordinates = coordinates;
-            this.dangerColor = dangerColor;
         }
 
         private void OnDragReleased(MouseEvent e) {
@@ -83,17 +87,26 @@ public class Cell extends Rectangle {
                 takeFigureOnField((x, y) -> field.getGrid().get(x)
                         .get(y).setOpacity(0.7));
             } else {
-                takeFigureOnField((x, y) -> field.getGrid().get(x)
-                        .get(y).setFill(dangerColor));
+                takeFigureOnField((x, y) -> {
+                    Cell cell = field.getGrid().get(x).get(y);
+                    if (cell.getIsFilled()) {
+                        cell.setFill(intersectColor);
+                    } else {
+                        cell.setFill(dangerColor);
+                    }
+                });
             }
         }
 
         private void OnDragExited(MouseEvent e) {
             takeFigureOnField((x, y) -> {
-                field.getGrid().get(x)
-                        .get(y).setOpacity(1);
-                field.getGrid().get(x)
-                        .get(y).setFill(Cell.this.initialColor);
+                Cell cell = field.getGrid().get(x).get(y);
+                if (cell.getIsFilled()) {
+                    cell.setFill(filledColor);
+                } else {
+                    cell.setFill(initialColor);
+                }
+                cell.setOpacity(1);
             });
         }
 
@@ -106,9 +119,7 @@ public class Cell extends Rectangle {
                         if (xToFill >= 0 && yToFill >= 0
                                 && xToFill < field.getGrid().size() &&
                                 yToFill < field.getGrid().get(0).size()) {
-                            if (!field.getGrid().get(xToFill).get(yToFill).getIsFilled()) {
-                                action.execute(xToFill, yToFill);
-                            }
+                            action.execute(xToFill, yToFill);
                         }
                     }
                 }

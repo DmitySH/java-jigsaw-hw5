@@ -84,8 +84,7 @@ public class Field extends GridPane {
             grid.add(new ArrayList<>());
             for (int j = 0; j < getColumns(); j++) {
                 Cell box = new Cell(new IntPoint(i, j), getCellSize(), getCellSize(),
-                        Color.GRAY, Color.GREENYELLOW, this);
-
+                        Color.GRAY, Color.GREENYELLOW, Color.PINK, Color.RED, this);
                 grid.get(grid.size() - 1).add(box);
                 this.add(box, i, j);
             }
