@@ -1,43 +1,53 @@
 package bse202.sda.jigsaw.controllers;
 
+import bse202.sda.jigsaw.models.fxml.Cell;
 import bse202.sda.jigsaw.models.fxml.Field;
 import bse202.sda.jigsaw.models.fxml.Figure;
 import bse202.sda.jigsaw.utils.Dragger;
+import bse202.sda.jigsaw.utils.Spawner;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
-
     @FXML
     public Field field;
-
     @FXML
     public Pane pane;
-
     @FXML
     public VBox mainBox;
     @FXML
-    public Pane figuresSpawn;
+    public HBox figuresSpawn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         field.draggedNode = Dragger::getLastDragged;
-        Figure f1 = new Figure(Figure.FigureType.FIRST, 50, Color.GOLD);
-        Figure f2 = new Figure(Figure.FigureType.SECOND, 50, Color.GOLD);
-        Figure f3 = new Figure(Figure.FigureType.THIRD, 50, Color.GOLD);
+        List<Node> figures = new ArrayList<>();
 
-        Dragger dg1 = new Dragger(f1);
-        Dragger dg2 = new Dragger(f2);
-        Dragger dg3 = new Dragger(f3);
 
-        figuresSpawn.getChildren().add(f1);
-        figuresSpawn.getChildren().add(f2);
-        figuresSpawn.getChildren().add(f3);
+        for (Figure.FigureType type :
+                Figure.FigureType.values()) {
+            figures.add(new Figure(type, 60, Color.GOLD));
+            Dragger dg = new Dragger(figures.get(figures.size() - 1));
+        }
+
+
+        Spawner spawner = new Spawner(figuresSpawn, figures);
+
+        List<List<Cell>> grid = field.getGrid();
+        for (List<Cell> cells : grid) {
+            for (int j = 0; j < grid.get(0).size(); j++) {
+                cells.get(j).onFigurePlaced = spawner::respawn;
+            }
+        }
     }
 }

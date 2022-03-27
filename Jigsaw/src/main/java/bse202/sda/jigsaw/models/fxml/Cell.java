@@ -1,5 +1,6 @@
 package bse202.sda.jigsaw.models.fxml;
 
+import bse202.sda.jigsaw.interfaces.Action;
 import bse202.sda.jigsaw.interfaces.CoordinateTransfer;
 import bse202.sda.jigsaw.interfaces.TwoConsumer;
 import bse202.sda.jigsaw.utils.IntPoint;
@@ -16,6 +17,7 @@ public class Cell extends Rectangle {
     private final Color initialColor;
     private final Color filledColor;
 
+    public Action onFigurePlaced;
 
     public BooleanProperty isFilledProperty() {
         if (this.isFilled == null) {
@@ -72,6 +74,7 @@ public class Cell extends Rectangle {
                 takeFigureOnField((x, y) ->
                         field.getGrid().get(x).get(y).setIsFilled(true)
                 );
+                onFigurePlaced.execute();
             }
         }
 

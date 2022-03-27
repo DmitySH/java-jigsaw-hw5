@@ -12,4 +12,6 @@ module bse.sda.jigsaw {
     opens bse202.sda.jigsaw.models.fxml to javafx.fxml;
 
     exports bse202.sda.jigsaw.utils;
+    exports bse202.sda.jigsaw.interfaces;
+
 }
