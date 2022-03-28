@@ -363,7 +363,7 @@ public class Figure extends Group implements CoordinateTransfer {
         Rectangle r = new Rectangle(rectSize, rectSize, rectColor);
         r.setStrokeType(StrokeType.CENTERED);
         r.setStrokeWidth(2);
-        r.setStroke(Color.RED);
+        r.setStroke(Color.rgb(0, 33, 55));
         r.addEventFilter(MouseEvent.MOUSE_PRESSED,
                 e -> calculateCoordinatesFromRectangle(r));
         return r;

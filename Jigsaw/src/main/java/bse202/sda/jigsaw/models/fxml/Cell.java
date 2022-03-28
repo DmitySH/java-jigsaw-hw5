@@ -32,14 +32,14 @@ public class Cell extends Rectangle {
 
     public void setIsFilled(boolean value) {
         isFilledProperty().set(value);
-        if (getIsFilled()) {
+        if (IsFilled()) {
             this.setFill(filledColor);
         } else {
             this.setFill(initialColor);
         }
     }
 
-    public boolean getIsFilled() {
+    public boolean IsFilled() {
         return isFilled != null && isFilled.get();
     }
 
@@ -92,7 +92,7 @@ public class Cell extends Rectangle {
             } else {
                 takeFigureOnField((x, y) -> {
                     Cell cell = field.getGrid().get(x).get(y);
-                    if (cell.getIsFilled()) {
+                    if (cell.IsFilled()) {
                         cell.setFill(intersectColor);
                     } else {
                         cell.setFill(dangerColor);
@@ -104,7 +104,7 @@ public class Cell extends Rectangle {
         private void OnDragExited(MouseEvent e) {
             takeFigureOnField((x, y) -> {
                 Cell cell = field.getGrid().get(x).get(y);
-                if (cell.getIsFilled()) {
+                if (cell.IsFilled()) {
                     cell.setFill(filledColor);
                 } else {
                     cell.setFill(initialColor);
@@ -137,7 +137,7 @@ public class Cell extends Rectangle {
                         if (!(xToFill >= 0 && yToFill >= 0
                                 && xToFill < field.getGrid().size() &&
                                 yToFill < field.getGrid().get(0).size())
-                                || field.getGrid().get(xToFill).get(yToFill).getIsFilled()) {
+                                || field.getGrid().get(xToFill).get(yToFill).IsFilled()) {
                             return false;
                         }
                     }
