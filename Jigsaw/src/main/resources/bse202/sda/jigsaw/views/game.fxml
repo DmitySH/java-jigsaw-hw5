@@ -9,11 +9,12 @@
 <?import javafx.scene.layout.HBox?>
 
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Button?>
 <VBox fx:id="mainBox"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="bse202.sda.jigsaw.controllers.GameController"
       alignment="TOP_CENTER"
-      style="-fx-padding: 60 60 0 60"
+      style="-fx-padding: 30 60 0 60"
       spacing="100">
     <stylesheets>
         <URL value="@css/styles.css"/>
@@ -21,7 +22,7 @@
     <Pane fx:id="pane" prefWidth="560" maxWidth="560" minWidth="560" maxHeight="540">
         <Field fx:id="field" id="field" rows="9" columns="9" cellSize="60"/>
     </Pane>
-    <VBox alignment="CENTER" style="-fx-padding: 60 60 40 60; -fx-spacing: 30">
+    <VBox alignment="CENTER" style="-fx-padding: 60 60 10 60; -fx-spacing: 30">
         <HBox prefWidth="560" maxWidth="560" minWidth="560"
               prefHeight="200" maxHeight="200" minHeight="200"
               fx:id="figuresSpawn"
@@ -38,8 +39,8 @@
                 <ImageView fx:id="seconds2"/>
             </HBox>
         </HBox>
+        <Button fx:id="stopButton" text="End game" onAction="#endGame"/>
     </VBox>
-
 </VBox>
 
 

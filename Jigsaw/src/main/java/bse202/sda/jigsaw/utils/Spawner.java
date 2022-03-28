@@ -11,12 +11,14 @@ public class Spawner {
     private final Pane container;
     private final List<Node> elements;
     private static final Random rnd;
+    private int totalSpawns;
 
     static {
         rnd = ThreadLocalRandom.current();
     }
 
     public Spawner(Pane container, List<Node> elements) {
+        totalSpawns = 1;
         this.container = container;
         this.elements = elements;
         Node node = elements.get(rnd.nextInt(elements.size()));
@@ -33,6 +35,7 @@ public class Spawner {
         container.getChildren().clear();
         Node node = elements.get(rnd.nextInt(elements.size()));
         container.getChildren().add(node);
+        ++totalSpawns;
     }
 
     private void makeParentsTransparentFalse() {
@@ -41,5 +44,9 @@ public class Spawner {
             parent.setMouseTransparent(false);
             parent = parent.getParent();
         }
+    }
+
+    public int getTotalSpawns() {
+        return totalSpawns;
     }
 }
