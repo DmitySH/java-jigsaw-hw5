@@ -1,12 +1,11 @@
 package bse202.sda.jigsaw.utils;
 
 import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Spawner {
     private final Pane container;
@@ -14,7 +13,7 @@ public class Spawner {
     private static final Random rnd;
 
     static {
-        rnd = new Random();
+        rnd = ThreadLocalRandom.current();
     }
 
     public Spawner(Pane container, List<Node> elements) {
