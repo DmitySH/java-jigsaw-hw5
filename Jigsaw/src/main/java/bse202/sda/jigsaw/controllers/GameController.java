@@ -5,9 +5,11 @@ import bse202.sda.jigsaw.models.fxml.Field;
 import bse202.sda.jigsaw.models.fxml.Figure;
 import bse202.sda.jigsaw.utils.Dragger;
 import bse202.sda.jigsaw.utils.Spawner;
+import bse202.sda.jigsaw.utils.Timer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -27,6 +29,8 @@ public class GameController implements Initializable {
     public VBox mainBox;
     @FXML
     public HBox figuresSpawn;
+    @FXML
+    public Label time;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,5 +53,8 @@ public class GameController implements Initializable {
                 cells.get(j).onFigurePlaced = spawner::respawn;
             }
         }
+
+        Timer timer = new Timer(time, 0);
+        timer.start();
     }
 }

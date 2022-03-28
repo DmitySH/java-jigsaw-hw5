@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.control.Label?>
 <VBox fx:id="mainBox"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="bse202.sda.jigsaw.controllers.GameController"
@@ -24,6 +25,7 @@
           style="-fx-spacing: 70; -fx-background-color: red"
           alignment="CENTER">
     </HBox>
+    <Label fx:id="time"/>
 </VBox>
 
 
