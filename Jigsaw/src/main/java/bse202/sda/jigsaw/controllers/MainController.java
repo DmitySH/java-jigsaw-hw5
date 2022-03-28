@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -51,6 +52,11 @@ public class MainController implements Initializable {
 
     public void closeApp(ActionEvent e) {
         Stage stage = (Stage) (quitButton.getScene().getWindow());
-        stage.close();
+        stage.fireEvent(
+                new WindowEvent(
+                        stage,
+                        WindowEvent.WINDOW_CLOSE_REQUEST
+                )
+        );
     }
 }

@@ -38,7 +38,7 @@
                 <ImageView fx:id="seconds2"/>
             </HBox>
         </HBox>
-        <Button fx:id="stopButton" text="End game" onAction="#endGame"/>
+        <Button styleClass="button-styled" fx:id="stopButton" text="END GAME" onAction="#endGame"/>
     </VBox>
 </VBox>
 
