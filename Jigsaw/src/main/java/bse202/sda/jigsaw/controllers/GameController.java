@@ -9,7 +9,7 @@ import bse202.sda.jigsaw.utils.Timer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -29,8 +29,15 @@ public class GameController implements Initializable {
     public VBox mainBox;
     @FXML
     public HBox figuresSpawn;
+
     @FXML
-    public Label time;
+    public ImageView minutes1;
+    @FXML
+    public ImageView minutes2;
+    @FXML
+    public ImageView seconds1;
+    @FXML
+    public ImageView seconds2;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,7 +61,17 @@ public class GameController implements Initializable {
             }
         }
 
-        Timer timer = new Timer(time, 0);
+        this.minutes1.setFitHeight(80);
+        this.minutes1.setFitWidth(80);
+        this.minutes2.setFitHeight(80);
+        this.minutes2.setFitWidth(80);
+        this.seconds1.setFitHeight(80);
+        this.seconds1.setFitWidth(80);
+        this.seconds2.setFitHeight(80);
+        this.seconds2.setFitWidth(80);
+
+        Timer timer = new Timer(0,
+                minutes1, minutes2, seconds1, seconds2);
         timer.start();
     }
 }

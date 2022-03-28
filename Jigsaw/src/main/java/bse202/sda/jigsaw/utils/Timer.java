@@ -1,25 +1,60 @@
 package bse202.sda.jigsaw.utils;
 
+import bse202.sda.jigsaw.JigsawGame;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Labeled;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class Timer {
     private static final int SEC_IN_MIN = 60;
 
-    private final Labeled label;
-    private long currentSeconds;
+    private int currentSeconds;
     private Timeline timeline;
 
-    public Timer(Labeled label, long startTime) {
-        this.label = label;
+    private final ImageView minutes1;
+    private final ImageView minutes2;
+    private final ImageView seconds1;
+    private final ImageView seconds2;
+
+    private final ArrayList<Image> digits;
+
+
+    public Timer(int startTime,
+                 ImageView iv1, ImageView iv2,
+                 ImageView iv3, ImageView iv4) {
         currentSeconds = startTime;
-        label.setText(String.format("Minutes: %d\tSeconds: %d",
-                getMinutes(), getSeconds()));
+        digits = new ArrayList<>();
+
         initTimer();
+
+        Class<?> clazz = JigsawGame.class;
+        InputStream input;
+        Image image;
+        for (int i = 0; i < 10; i++) {
+            input = clazz.getResourceAsStream(
+                    String.format("views/images/%d.png", i));
+
+            image = new Image(Objects.requireNonNull(input));
+            digits.add(image);
+        }
+
+        minutes1 = iv1;
+        minutes2 = iv2;
+        seconds1 = iv3;
+        seconds2 = iv4;
+
+        minutes1.setImage(digits.get(getMinutes() / 10));
+        minutes2.setImage(digits.get(getMinutes() % 10));
+        seconds1.setImage(digits.get(getSeconds() / 10));
+        seconds2.setImage(digits.get(getSeconds() % 10));
     }
 
     public void start() {
@@ -30,11 +65,11 @@ public class Timer {
         timeline.stop();
     }
 
-    public long getMinutes() {
+    public int getMinutes() {
         return currentSeconds / SEC_IN_MIN;
     }
 
-    public long getSeconds() {
+    public int getSeconds() {
         return currentSeconds % SEC_IN_MIN;
     }
 
@@ -46,8 +81,10 @@ public class Timer {
 
     private void tick(ActionEvent e) {
         ++currentSeconds;
-        label.setText(String.format("Minutes: %d\tSeconds: %d",
-                getMinutes(), getSeconds()));
-    }
 
+        minutes1.setImage(digits.get(getMinutes() / 10));
+        minutes2.setImage(digits.get(getMinutes() % 10));
+        seconds1.setImage(digits.get(getSeconds() / 10));
+        seconds2.setImage(digits.get(getSeconds() % 10));
+    }
 }

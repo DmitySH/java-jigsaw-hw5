@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <VBox fx:id="mainBox"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="bse202.sda.jigsaw.controllers.GameController"
@@ -25,10 +25,19 @@
         <HBox prefWidth="560" maxWidth="560" minWidth="560"
               prefHeight="200" maxHeight="200" minHeight="200"
               fx:id="figuresSpawn"
-              style="-fx-background-color: #dee8ec"
+              style="-fx-background-color: #d8f2f0;"
               alignment="CENTER">
         </HBox>
-        <Label fx:id="time"/>
+        <HBox spacing="50" alignment="CENTER">
+            <HBox>
+                <ImageView fx:id="minutes1"/>
+                <ImageView fx:id="minutes2"/>
+            </HBox>
+            <HBox>
+                <ImageView fx:id="seconds1"/>
+                <ImageView fx:id="seconds2"/>
+            </HBox>
+        </HBox>
     </VBox>
 
 </VBox>
