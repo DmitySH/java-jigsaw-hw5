@@ -8,11 +8,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -24,10 +27,17 @@ public class MainController implements Initializable {
     public Button quitButton;
     @FXML
     public Button authorButton;
+    @FXML
+    public ImageView logo;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        InputStream input = JigsawGame.class
+                .getResourceAsStream("views/images/logo.png");
+        Image image = new Image(Objects.requireNonNull(input));
+        logo.setFitWidth(160);
+        logo.setFitHeight(160);
+        logo.setImage(image);
     }
 
     public void createGameWindow(ActionEvent e) {
