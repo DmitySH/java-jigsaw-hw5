@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="614.0" prefWidth="372.0" spacing="30.0" xmlns="http://javafx.com/javafx/17"
+      fx:controller="bse202.sda.jigsaw.controllers.MainController"
+      xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets top="200.0"/>
+    </padding>
+    <Button fx:id="startButton" alignment="TOP_LEFT" mnemonicParsing="false" text="PLAY"
+            onAction="#createGameWindow"/>
+    <Button mnemonicParsing="false" text="Button"/>
+</VBox>
