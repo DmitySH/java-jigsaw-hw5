@@ -24,7 +24,7 @@ public class JigsawGame extends Application {
         mainScene.getStylesheets().add(Objects.requireNonNull(JigsawGame.class
                 .getResource("views/css/styles.css")).toExternalForm());
 
-        stage.setTitle("Main");
+        stage.setTitle("Jigsaw by DmittySH");
         stage.setScene(mainScene);
         stage.show();
         stage.setMinHeight(stage.getHeight());

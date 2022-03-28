@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,6 +22,8 @@ public class MainController implements Initializable {
     public Button startButton;
     @FXML
     public Button quitButton;
+    @FXML
+    public Button authorButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -42,7 +45,7 @@ public class MainController implements Initializable {
 
             newWindow.initModality(Modality.WINDOW_MODAL);
             newWindow.initOwner(startButton.getScene().getWindow());
-            newWindow.setTitle("Jigsaw By DmitriySH");
+            newWindow.setTitle("Jigsaw by DmittySH");
             newWindow.setScene(gameScene);
             newWindow.show();
         } catch (IOException ex) {
@@ -58,5 +61,12 @@ public class MainController implements Initializable {
                         WindowEvent.WINDOW_CLOSE_REQUEST
                 )
         );
+    }
+
+    public void showAuthor(ActionEvent e) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Author");
+        alert.setHeaderText("Game was designed and created  by Dmitty\nBSE202");
+        alert.showAndWait();
     }
 }

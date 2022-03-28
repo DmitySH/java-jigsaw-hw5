@@ -16,11 +16,13 @@
     </padding>
     <HBox alignment="CENTER"
     spacing="50">
-        <Button styleClass="button-styled" fx:id="startButton" alignment="TOP_LEFT"
+        <Button styleClass="button-styled-dng" fx:id="startButton" alignment="TOP_LEFT"
                 mnemonicParsing="false" text="PLAY"
                 onAction="#createGameWindow"/>
         <Button styleClass="button-styled-dng" fx:id="quitButton" mnemonicParsing="false" text="QUIT"
                 onAction="#closeApp"/>
     </HBox>
-
+    <Button styleClass="button-styled" fx:id="authorButton"
+            mnemonicParsing="false" text="ABOUT AUTHOR"
+            onAction="#showAuthor"/>
 </VBox>

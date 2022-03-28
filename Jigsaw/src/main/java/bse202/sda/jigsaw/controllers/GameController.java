@@ -98,8 +98,7 @@ public class GameController implements Initializable {
                 spawner.getTotalSpawns() - 1, calculateNumberOfFilled(),
                 field.getRows() * field.getColumns()
         ));
-        alert.showAndWait().ifPresent(rs -> {
-        });
+        alert.showAndWait();
 
         Stage stage = (Stage) (stopButton.getScene().getWindow());
         stage.close();
