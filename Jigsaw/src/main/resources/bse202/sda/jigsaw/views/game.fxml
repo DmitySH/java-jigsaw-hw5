@@ -13,19 +13,24 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="bse202.sda.jigsaw.controllers.GameController"
       alignment="TOP_CENTER"
-      style="-fx-padding: 60 60 60 60"
+      style="-fx-padding: 60 60 0 60"
       spacing="100">
     <stylesheets>
         <URL value="@css/styles.css"/>
     </stylesheets>
-    <Pane fx:id="pane" prefWidth="540" maxWidth="540" minWidth="540" maxHeight="540">
+    <Pane fx:id="pane" prefWidth="560" maxWidth="560" minWidth="560" maxHeight="540">
         <Field fx:id="field" id="field" rows="9" columns="9" cellSize="60"/>
     </Pane>
-    <HBox fx:id="figuresSpawn"
-          style="-fx-spacing: 70; -fx-background-color: red"
-          alignment="CENTER">
-    </HBox>
-    <Label fx:id="time"/>
+    <VBox alignment="CENTER" style="-fx-padding: 60 60 40 60; -fx-spacing: 30">
+        <HBox prefWidth="560" maxWidth="560" minWidth="560"
+              prefHeight="200" maxHeight="200" minHeight="200"
+              fx:id="figuresSpawn"
+              style="-fx-background-color: #dee8ec"
+              alignment="CENTER">
+        </HBox>
+        <Label fx:id="time"/>
+    </VBox>
+
 </VBox>
 
 

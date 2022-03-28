@@ -30,12 +30,14 @@ public class MainController implements Initializable {
         Stage newWindow = new Stage();
 
         try {
-            Scene gameScene = new Scene(fxmlLoader.load(), 1240, 980);
+            Scene gameScene = new Scene(fxmlLoader.load(), 780, 980);
             gameScene.getStylesheets().add(Objects.requireNonNull(JigsawGame.class
                     .getResource("views/css/styles.css")).toExternalForm());
 
-            newWindow.initModality(Modality.WINDOW_MODAL);
+            newWindow.setMinHeight(1015);
+            newWindow.setMinWidth(730);
 
+            newWindow.initModality(Modality.WINDOW_MODAL);
             newWindow.initOwner(startButton.getScene().getWindow());
             newWindow.setTitle("Jigsaw By DmitriySH");
             newWindow.setScene(gameScene);
