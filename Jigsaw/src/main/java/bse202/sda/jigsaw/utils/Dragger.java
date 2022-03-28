@@ -45,7 +45,6 @@ public class Dragger {
             if (event.isSecondaryButtonDown()){
                 return;
             }
-            System.out.println("started");
             target.startFullDrag();
             lastDragged = target;
             event.consume();
@@ -83,7 +82,6 @@ public class Dragger {
 
                 target.setTranslateX(0);
                 target.setTranslateY(0);
-                System.out.println(event.getSceneX() + "  " + event.getSceneY());
                 target.setMouseTransparent(false);
                 changeParentsTransparent(false);
             }

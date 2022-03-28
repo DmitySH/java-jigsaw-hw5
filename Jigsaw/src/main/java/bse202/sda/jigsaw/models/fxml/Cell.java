@@ -18,6 +18,7 @@ public class Cell extends Rectangle {
     private final Color filledColor;
     private final Color dangerColor;
     private final Color intersectColor;
+    private final Color successColor;
 
 
     public Action onFigurePlaced;
@@ -43,12 +44,14 @@ public class Cell extends Rectangle {
     }
 
     public Cell(IntPoint coordinates, double v, double v1,
-                Color initialColor, Color filledColor, Color dangerColor, Color intersectColor, Field field) {
+                Color initialColor, Color successColor, Color filledColor,
+                Color dangerColor, Color intersectColor, Field field) {
         super(v, v1, initialColor);
 
         CellDragHandler dragHandler = new CellDragHandler(field, coordinates);
 
         this.initialColor = initialColor;
+        this.successColor = successColor;
         this.filledColor = filledColor;
         this.dangerColor = dangerColor;
         this.intersectColor = intersectColor;
@@ -85,7 +88,7 @@ public class Cell extends Rectangle {
         private void OnDragEntered(MouseEvent e) {
             if (checkBeforePlace()) {
                 takeFigureOnField((x, y) -> field.getGrid().get(x)
-                        .get(y).setOpacity(0.7));
+                        .get(y).setFill(successColor));
             } else {
                 takeFigureOnField((x, y) -> {
                     Cell cell = field.getGrid().get(x).get(y);
@@ -106,7 +109,6 @@ public class Cell extends Rectangle {
                 } else {
                     cell.setFill(initialColor);
                 }
-                cell.setOpacity(1);
             });
         }
 

@@ -13,5 +13,5 @@ module bse.sda.jigsaw {
 
     exports bse202.sda.jigsaw.utils;
     exports bse202.sda.jigsaw.interfaces;
-
+    exports bse202.sda.jigsaw.recources;
 }
