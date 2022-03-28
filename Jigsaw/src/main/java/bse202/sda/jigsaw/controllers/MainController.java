@@ -18,6 +18,8 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
     @FXML
     public Button startButton;
+    @FXML
+    public Button quitButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -45,5 +47,10 @@ public class MainController implements Initializable {
         } catch (IOException ex) {
             System.out.println("Unable to create game window");
         }
+    }
+
+    public void closeApp(ActionEvent e) {
+        Stage stage = (Stage) (quitButton.getScene().getWindow());
+        stage.close();
     }
 }

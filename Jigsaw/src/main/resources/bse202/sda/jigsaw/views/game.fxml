@@ -26,7 +26,6 @@
         <HBox prefWidth="560" maxWidth="560" minWidth="560"
               prefHeight="200" maxHeight="200" minHeight="200"
               fx:id="figuresSpawn"
-              style="-fx-background-color: #d8f2f0;"
               alignment="CENTER">
         </HBox>
         <HBox spacing="50" alignment="CENTER">
