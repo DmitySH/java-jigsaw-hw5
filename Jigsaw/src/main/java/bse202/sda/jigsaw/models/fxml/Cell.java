@@ -6,6 +6,7 @@ import bse202.sda.jigsaw.interfaces.TwoConsumer;
 import bse202.sda.jigsaw.utils.IntPoint;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -76,7 +77,14 @@ public class Cell extends Rectangle {
             this.coordinates = coordinates;
         }
 
-        private void OnDragReleased(MouseEvent e) {
+        private void OnDragReleased(MouseDragEvent e) {
+            if (e.getButton() != MouseButton.PRIMARY){
+                return;
+            }
+            if (e.isSecondaryButtonDown()){
+                return;
+            }
+
             if (checkBeforePlace()) {
                 takeFigureOnField((x, y) ->
                         field.getGrid().get(x).get(y).setIsFilled(true)
@@ -86,6 +94,9 @@ public class Cell extends Rectangle {
         }
 
         private void OnDragEntered(MouseEvent e) {
+            if (e.getButton() != MouseButton.PRIMARY){
+                return;
+            }
             if (checkBeforePlace()) {
                 takeFigureOnField((x, y) -> field.getGrid().get(x)
                         .get(y).setFill(field.getGrid().get(x).get(y).successColor));

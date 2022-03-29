@@ -4,6 +4,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 public class Dragger {
@@ -32,7 +33,7 @@ public class Dragger {
     private static Node lastDragged;
 
     public Dragger(Node target) {
-        this(target, true);
+        this(target, false);
     }
 
     public Dragger(Node target, boolean isDraggable) {
@@ -46,7 +47,7 @@ public class Dragger {
 
     private void createHandlers() {
         dragDetected = event -> {
-            if (event.isSecondaryButtonDown()) {
+            if (event.getButton() != MouseButton.PRIMARY) {
                 return;
             }
             target.startFullDrag();
@@ -55,6 +56,9 @@ public class Dragger {
         };
 
         setAnchor = event -> {
+            if (event.getButton() != MouseButton.PRIMARY) {
+                return;
+            }
             if (event.isPrimaryButtonDown()) {
                 cycleState = State.ACTIVE;
 
@@ -73,6 +77,9 @@ public class Dragger {
         };
 
         updatePositionOnDrag = event -> {
+            if (event.getButton() != MouseButton.PRIMARY) {
+                return;
+            }
             if (cycleState != State.INACTIVE) {
                 target.setTranslateX(event.getSceneX() - anchorX);
                 target.setTranslateY(event.getSceneY() - anchorY);
@@ -80,19 +87,23 @@ public class Dragger {
         };
 
         commitPositionOnRelease = event -> {
+            if (event.getButton() != MouseButton.PRIMARY) {
+                return;
+            }
             if (cycleState != State.INACTIVE) {
                 target.setLayoutX(event.getSceneX() - mouseOffsetFromNodeZeroX);
                 target.setLayoutY(event.getSceneY() - mouseOffsetFromNodeZeroY);
 
                 target.setTranslateX(0);
                 target.setTranslateY(0);
-                target.setMouseTransparent(false);
-                changeParentsTransparent(false);
+
             }
+            target.setMouseTransparent(false);
+            changeParentsTransparent(false);
         };
     }
 
-    public void createDraggableProperty() {
+    private void createDraggableProperty() {
         isDraggable = new SimpleBooleanProperty();
         isDraggable.addListener((observable, oldValue, newValue) -> {
             if (newValue) {
