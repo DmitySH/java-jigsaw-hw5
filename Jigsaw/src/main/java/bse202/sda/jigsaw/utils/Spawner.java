@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Spawner of figures.
+ */
 public class Spawner {
     private final Pane container;
     private final List<Node> elements;
@@ -17,6 +20,12 @@ public class Spawner {
         rnd = ThreadLocalRandom.current();
     }
 
+    /**
+     * Constructor of spawner.
+     *
+     * @param container container to spawn in.
+     * @param elements  elements to spawn.
+     */
     public Spawner(Pane container, List<Node> elements) {
         totalSpawns = 1;
         this.container = container;
@@ -25,6 +34,9 @@ public class Spawner {
         container.getChildren().add(node);
     }
 
+    /**
+     * Respawns element.
+     */
     public void respawn() {
         Node current = container.getChildren().get(0);
         current.setTranslateX(0);
@@ -38,6 +50,9 @@ public class Spawner {
         ++totalSpawns;
     }
 
+    /**
+     * Allows events go through parents.
+     */
     private void makeParentsTransparentFalse() {
         Node parent = container.getChildren().get(0).getParent();
         while (parent.getParent() != null) {
@@ -46,6 +61,11 @@ public class Spawner {
         }
     }
 
+    /**
+     * Gets number of spawns.
+     *
+     * @return number of spawns.
+     */
     public int getTotalSpawns() {
         return totalSpawns;
     }

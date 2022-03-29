@@ -13,6 +13,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 
+/**
+ * Class of field cell.
+ */
 public class Cell extends Rectangle {
     private BooleanProperty isFilled;
     private final Color initialColor;
@@ -24,6 +27,11 @@ public class Cell extends Rectangle {
 
     public Action onFigurePlaced;
 
+    /**
+     * Get filled.
+     *
+     * @return is filled.
+     */
     public BooleanProperty isFilledProperty() {
         if (this.isFilled == null) {
             isFilled = new SimpleBooleanProperty();
@@ -31,6 +39,11 @@ public class Cell extends Rectangle {
         return isFilled;
     }
 
+    /**
+     * Sets filled.
+     *
+     * @param value value to set.
+     */
     public void setIsFilled(boolean value) {
         isFilledProperty().set(value);
         if (IsFilled()) {
@@ -40,10 +53,28 @@ public class Cell extends Rectangle {
         }
     }
 
+    /**
+     * Short accessor to is filled.
+     *
+     * @return is filled.
+     */
     public boolean IsFilled() {
         return isFilled != null && isFilled.get();
     }
 
+    /**
+     * Cells constructor.
+     *
+     * @param coordinates    position.
+     * @param v              size1.
+     * @param v1             size2.
+     * @param initialColor   initialColor.
+     * @param successColor   successColor.
+     * @param filledColor    filledColor.
+     * @param dangerColor    dangerColor.
+     * @param intersectColor intersectColor.
+     * @param field          field of a cell.
+     */
     public Cell(IntPoint coordinates, double v, double v1,
                 Color initialColor, Color successColor, Color filledColor,
                 Color dangerColor, Color intersectColor, Field field) {
@@ -77,11 +108,16 @@ public class Cell extends Rectangle {
             this.coordinates = coordinates;
         }
 
+        /**
+         * Event when drag done.
+         *
+         * @param e event.
+         */
         private void OnDragReleased(MouseDragEvent e) {
-            if (e.getButton() != MouseButton.PRIMARY){
+            if (e.getButton() != MouseButton.PRIMARY) {
                 return;
             }
-            if (e.isSecondaryButtonDown()){
+            if (e.isSecondaryButtonDown()) {
                 return;
             }
 
@@ -93,8 +129,13 @@ public class Cell extends Rectangle {
             }
         }
 
+        /**
+         * Event when drag entered.
+         *
+         * @param e event.
+         */
         private void OnDragEntered(MouseEvent e) {
-            if (e.getButton() != MouseButton.PRIMARY){
+            if (e.getButton() != MouseButton.PRIMARY) {
                 return;
             }
             if (checkBeforePlace()) {
@@ -112,6 +153,11 @@ public class Cell extends Rectangle {
             }
         }
 
+        /**
+         * Event when drag exited.
+         *
+         * @param e event.
+         */
         private void OnDragExited(MouseEvent e) {
             takeFigureOnField((x, y) -> {
                 Cell cell = field.getGrid().get(x).get(y);
@@ -123,6 +169,11 @@ public class Cell extends Rectangle {
             });
         }
 
+        /**
+         * Follows through figure on field.
+         *
+         * @param action action to execute.
+         */
         private void takeFigureOnField(TwoConsumer<Integer, Integer> action) {
             if (field.draggedNode.get() instanceof CoordinateTransfer transfer) {
                 if (transfer.transferCoordinates().isPresent()) {
@@ -139,6 +190,11 @@ public class Cell extends Rectangle {
             }
         }
 
+        /**
+         * Checks if figure can be placed.
+         *
+         * @return figure can be placed.
+         */
         private boolean checkBeforePlace() {
             if (field.draggedNode.get() instanceof CoordinateTransfer transfer) {
                 if (transfer.transferCoordinates().isPresent()) {

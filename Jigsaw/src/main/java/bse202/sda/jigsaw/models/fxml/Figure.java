@@ -14,7 +14,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Figure class.
+ */
 public class Figure extends Group implements CoordinateTransfer {
+    /**
+     * All figure types.
+     */
     public enum FigureType {
         FIRST,
         FIRST90,
@@ -49,6 +55,9 @@ public class Figure extends Group implements CoordinateTransfer {
         EIGHTH270,
     }
 
+    /**
+     * Rotater.
+     */
     public static Rotater2D rotater;
 
     static {
@@ -61,6 +70,13 @@ public class Figure extends Group implements CoordinateTransfer {
     private final HashMap<Rectangle, IntPoint> coordinates;
     private List<IntPoint> clickedRectangleCoordinates;
 
+    /**
+     * Constructor of figure.
+     *
+     * @param type  type of figure.
+     * @param size  size of cell.
+     * @param color color of cell.
+     */
     public Figure(FigureType type, int size, Color color) {
         super();
         rectSize = size;
@@ -250,6 +266,11 @@ public class Figure extends Group implements CoordinateTransfer {
         }
     }
 
+    /**
+     * Creates first figure.
+     *
+     * @param offset to x.
+     */
     private void figureFirst(int offset) {
         for (int i = 0; i < 2; i++) {
             Rectangle r = createRectangle();
@@ -269,6 +290,11 @@ public class Figure extends Group implements CoordinateTransfer {
         }
     }
 
+    /**
+     * Creates second figure.
+     *
+     * @param offset offset to x.
+     */
     private void figureSecond(int offset) {
         for (int i = 0; i < 2; i++) {
             Rectangle r = createRectangle();
@@ -289,6 +315,11 @@ public class Figure extends Group implements CoordinateTransfer {
         }
     }
 
+    /**
+     * Creates third figure.
+     *
+     * @param offset offset to x.
+     */
     private void figureThird(int offset) {
         for (int i = 0; i < 3; i++) {
             Rectangle r = createRectangle();
@@ -309,6 +340,9 @@ public class Figure extends Group implements CoordinateTransfer {
         }
     }
 
+    /**
+     * Creates fifth figure.
+     */
     private void figureFifth() {
         for (int i = 0; i < 3; i++) {
             Rectangle r = createRectangle();
@@ -319,6 +353,9 @@ public class Figure extends Group implements CoordinateTransfer {
         }
     }
 
+    /**
+     * Creates sixth figure.
+     */
     private void figureSixth() {
         Rectangle r = createRectangle();
         coordinates.put(r, new IntPoint((int) r.getX() / rectSize,
@@ -326,6 +363,9 @@ public class Figure extends Group implements CoordinateTransfer {
         this.getChildren().add(r);
     }
 
+    /**
+     * Creates seventh figure.
+     */
     private void figureSeventh() {
         for (int i = 0; i < 2; i++) {
             Rectangle r = createRectangle();
@@ -342,6 +382,9 @@ public class Figure extends Group implements CoordinateTransfer {
         this.getChildren().add(r);
     }
 
+    /**
+     * Creates eighth figure.
+     */
     private void figureEighth() {
         for (int i = 0; i < 3; i++) {
             Rectangle r = createRectangle();
@@ -359,6 +402,11 @@ public class Figure extends Group implements CoordinateTransfer {
         this.getChildren().add(r);
     }
 
+    /**
+     * Creates simple rectangle.
+     *
+     * @return rectangle.
+     */
     private Rectangle createRectangle() {
         Rectangle r = new Rectangle(rectSize, rectSize, rectColor);
         r.setStrokeType(StrokeType.CENTERED);
@@ -369,6 +417,11 @@ public class Figure extends Group implements CoordinateTransfer {
         return r;
     }
 
+    /**
+     * Calculates coordinates as if rectangle is root.
+     *
+     * @param r rectangle.
+     */
     private void calculateCoordinatesFromRectangle(Rectangle r) {
         IntPoint root = new IntPoint(coordinates.get(r));
         List<IntPoint> list = new ArrayList<>(coordinates.values());
@@ -381,6 +434,11 @@ public class Figure extends Group implements CoordinateTransfer {
         clickedRectangleCoordinates = list;
     }
 
+    /**
+     * Allows coordinate transfer.
+     *
+     * @return coordinates.
+     */
     @Override
     public Optional<List<IntPoint>> transferCoordinates() {
         return Optional.of(clickedRectangleCoordinates);

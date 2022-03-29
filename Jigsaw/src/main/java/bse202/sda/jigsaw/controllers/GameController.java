@@ -16,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -59,6 +58,7 @@ public class GameController implements Initializable {
                 Figure.FigureType.values()) {
             figures.add(new Figure(type, 50, GameColors.getInstance().SmoothBlue()));
             Dragger dg = new Dragger(figures.get(figures.size() - 1));
+            dg.setDraggableProperty(true);
         }
 
         spawner = new Spawner(figuresSpawn, figures);
@@ -69,6 +69,13 @@ public class GameController implements Initializable {
             }
         }
 
+        startTimer();
+    }
+
+    /**
+     * Starts timer.
+     */
+    private void startTimer() {
         this.minutes1.setFitHeight(80);
         this.minutes1.setFitWidth(80);
         this.minutes2.setFitHeight(80);
@@ -83,6 +90,11 @@ public class GameController implements Initializable {
         timer.start();
     }
 
+    /**
+     * Stops current game and shows stat.
+     *
+     * @param e event.
+     */
     public void endGame(ActionEvent e) {
         timer.stop();
 
@@ -104,6 +116,11 @@ public class GameController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Finds number of filled cells in a field.
+     *
+     * @return number of filled cells.
+     */
     private int calculateNumberOfFilled() {
         int sum = 0;
         for (int i = 0; i < field.getColumns(); i++) {

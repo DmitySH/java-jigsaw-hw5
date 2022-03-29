@@ -3,12 +3,17 @@ package bse202.sda.jigsaw.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Rotater in 2D.
+ */
 public class Rotater2D {
     private final List<List<Integer>> angle90;
     private final List<List<Integer>> angle180;
     private final List<List<Integer>> angle270;
 
-
+    /**
+     * Constructor of rotater.
+     */
     public Rotater2D() {
         angle90 = new ArrayList<>();
         angle180 = new ArrayList<>();
@@ -25,6 +30,12 @@ public class Rotater2D {
         createMatrix(270, angle270);
     }
 
+    /**
+     * Creates rotate matrix.
+     *
+     * @param angle  rotate angle.
+     * @param matrix matrix to fill.
+     */
     private void createMatrix(double angle, List<List<Integer>> matrix) {
         angle = Math.toRadians(angle);
         matrix.get(0).add((int) Math.cos(angle));
@@ -33,6 +44,12 @@ public class Rotater2D {
         matrix.get(1).add((int) Math.cos(angle));
     }
 
+    /**
+     * Production of matrix.
+     *
+     * @param matrix matrix.
+     * @param vector vector.
+     */
     private void matrixProd(List<List<Integer>> matrix, IntPoint vector) {
         IntPoint res = new IntPoint(0, 0);
         res.setX(matrix.get(0).get(0) * vector.getX()
@@ -44,6 +61,12 @@ public class Rotater2D {
         vector.setY(res.getY());
     }
 
+    /**
+     * Rotates vector on angle.
+     *
+     * @param angle  angle.
+     * @param vector vector.
+     */
     public void rotate(int angle, IntPoint vector) {
         switch (angle) {
             case 90 -> this.matrixProd(angle90, vector);

@@ -32,10 +32,21 @@ public class Dragger {
 
     private static Node lastDragged;
 
+    /**
+     * Constructor of dragger.
+     *
+     * @param target target to drag.
+     */
     public Dragger(Node target) {
         this(target, false);
     }
 
+    /**
+     * Constructor of dragger.
+     *
+     * @param target      target to drag.
+     * @param isDraggable @param allow drag..
+     */
     public Dragger(Node target, boolean isDraggable) {
         this.target = target;
         createHandlers();
@@ -45,6 +56,9 @@ public class Dragger {
         parentsToSetTransparent = 1;
     }
 
+    /**
+     * Creates all drag handlers.
+     */
     private void createHandlers() {
         dragDetected = event -> {
             if (event.getButton() != MouseButton.PRIMARY) {
@@ -103,6 +117,9 @@ public class Dragger {
         };
     }
 
+    /**
+     * Creates draggable flag.
+     */
     private void createDraggableProperty() {
         isDraggable = new SimpleBooleanProperty();
         isDraggable.addListener((observable, oldValue, newValue) -> {
@@ -120,26 +137,56 @@ public class Dragger {
         });
     }
 
+    /**
+     * Simple accessor is draggable.
+     *
+     * @return is draggable.
+     */
     public boolean isIsDraggable() {
         return isDraggable.get();
     }
 
+    /**
+     * Gets is draggable.
+     *
+     * @return is draggable.
+     */
     public BooleanProperty isDraggableProperty() {
         return isDraggable;
     }
 
+    /**
+     * Sets is draggable.
+     *
+     * @param value value to set.
+     */
     public void setDraggableProperty(boolean value) {
         isDraggable.set(value);
     }
 
+    /**
+     * Last dragged node.
+     *
+     * @return last node was dragged.
+     */
     public static Node getLastDragged() {
         return lastDragged;
     }
 
+    /**
+     * Sets number of parents to pass events through.
+     *
+     * @param parentsToSetTransparent number of parents.
+     */
     public void setParentsToSetTransparent(int parentsToSetTransparent) {
         this.parentsToSetTransparent = parentsToSetTransparent;
     }
 
+    /**
+     * Changes transparent of parents.
+     *
+     * @param isTransparent value to set.
+     */
     private void changeParentsTransparent(boolean isTransparent) {
         Node parent = target.getParent();
         int maxParents = parentsToSetTransparent;

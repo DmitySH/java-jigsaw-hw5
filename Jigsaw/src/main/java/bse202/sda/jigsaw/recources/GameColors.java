@@ -11,6 +11,9 @@ public class GameColors {
     private final Color smoothWhite;
     private final Color basicPink;
 
+    /**
+     * Resource class for game colors.
+     */
     private GameColors() {
         lightGreen = Color.rgb(118, 255, 122);
         dangerRed = Color.rgb(227, 18, 14);

@@ -40,6 +40,11 @@ public class MainController implements Initializable {
         logo.setImage(image);
     }
 
+    /**
+     * Creates new window with game.
+     *
+     * @param e event.
+     */
     public void createGameWindow(ActionEvent e) {
         FXMLLoader fxmlLoader = new FXMLLoader(
                 JigsawGame.class.getResource("views/game.fxml"));
@@ -63,6 +68,11 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Closes whole application.
+     *
+     * @param e event.
+     */
     public void closeApp(ActionEvent e) {
         Stage stage = (Stage) (quitButton.getScene().getWindow());
         stage.fireEvent(
@@ -73,6 +83,11 @@ public class MainController implements Initializable {
         );
     }
 
+    /**
+     * Shows info about author.
+     *
+     * @param e event.
+     */
     public void showAuthor(ActionEvent e) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Author");
