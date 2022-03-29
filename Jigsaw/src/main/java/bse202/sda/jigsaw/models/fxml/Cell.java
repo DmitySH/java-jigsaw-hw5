@@ -25,7 +25,7 @@ public class Cell extends Rectangle {
     private final Color successColor;
 
 
-    public Action onFigurePlaced;
+    private Action onFigurePlaced;
 
     /**
      * Get filled.
@@ -97,6 +97,15 @@ public class Cell extends Rectangle {
         this.addEventHandler(MouseDragEvent.MOUSE_DRAG_EXITED,
                 dragHandler::OnDragExited
         );
+    }
+
+    /**
+     * Setter for action.
+     *
+     * @param onFigurePlaced value to set.
+     */
+    public void setOnFigurePlaced(Action onFigurePlaced) {
+        this.onFigurePlaced = onFigurePlaced;
     }
 
     private class CellDragHandler {

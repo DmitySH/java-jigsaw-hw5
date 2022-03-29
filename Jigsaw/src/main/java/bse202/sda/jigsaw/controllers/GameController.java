@@ -65,7 +65,7 @@ public class GameController implements Initializable {
         List<List<Cell>> grid = field.getGrid();
         for (List<Cell> cells : grid) {
             for (int j = 0; j < grid.get(0).size(); j++) {
-                cells.get(j).onFigurePlaced = spawner::respawn;
+                cells.get(j).setOnFigurePlaced(spawner::respawn);
             }
         }
 
