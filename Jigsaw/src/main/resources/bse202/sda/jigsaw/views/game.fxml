@@ -10,24 +10,27 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.Button?>
-<VBox fx:id="mainBox"
+<HBox fx:id="mainBox"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="bse202.sda.jigsaw.controllers.GameController"
       alignment="TOP_CENTER"
-      style="-fx-padding: 30 60 0 60"
-      spacing="100">
+      style="-fx-padding: 10 60 0 60"
+      spacing="10">
     <stylesheets>
         <URL value="@css/styles.css"/>
     </stylesheets>
-    <Pane fx:id="pane" prefWidth="560" maxWidth="560" minWidth="560" maxHeight="540">
-        <Field fx:id="field" id="field" rows="9" columns="9" cellSize="60"/>
-    </Pane>
-    <VBox alignment="CENTER" style="-fx-padding: 60 60 10 60; -fx-spacing: 30">
+    <VBox>
+        <Pane fx:id="pane" prefWidth="560" maxWidth="560" minWidth="560" maxHeight="560">
+            <Field fx:id="field" id="field" rows="9" columns="9" cellSize="60"/>
+        </Pane>
         <HBox prefWidth="560" maxWidth="560" minWidth="560"
               prefHeight="200" maxHeight="200" minHeight="200"
               fx:id="figuresSpawn"
               alignment="CENTER">
         </HBox>
+    </VBox>
+
+    <VBox alignment="TOP_CENTER" style="-fx-padding: 240 60 10 60; -fx-spacing: 30">
         <HBox spacing="50" alignment="CENTER">
             <HBox>
                 <ImageView fx:id="minutes1"/>
@@ -40,7 +43,7 @@
         </HBox>
         <Button styleClass="button-styled" fx:id="stopButton" text="END GAME" onAction="#endGame"/>
     </VBox>
-</VBox>
+</HBox>
 
 
 

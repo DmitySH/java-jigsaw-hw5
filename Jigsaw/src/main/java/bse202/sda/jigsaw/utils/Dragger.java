@@ -14,6 +14,8 @@ public class Dragger {
 
     private final Node target;
 
+    private int parentsToSetTransparent;
+
     private double anchorX;
     private double anchorY;
     private double mouseOffsetFromNodeZeroX;
@@ -38,11 +40,13 @@ public class Dragger {
         createHandlers();
         createDraggableProperty();
         this.isDraggable.set(isDraggable);
+
+        parentsToSetTransparent = 1;
     }
 
     private void createHandlers() {
         dragDetected = event -> {
-            if (event.isSecondaryButtonDown()){
+            if (event.isSecondaryButtonDown()) {
                 return;
             }
             target.startFullDrag();
@@ -121,11 +125,17 @@ public class Dragger {
         return lastDragged;
     }
 
+    public void setParentsToSetTransparent(int parentsToSetTransparent) {
+        this.parentsToSetTransparent = parentsToSetTransparent;
+    }
+
     private void changeParentsTransparent(boolean isTransparent) {
         Node parent = target.getParent();
-        while (parent.getParent() != null) {
+        int maxParents = parentsToSetTransparent;
+        while (parent.getParent() != null && maxParents > 0) {
             parent.setMouseTransparent(isTransparent);
             parent = parent.getParent();
+            --maxParents;
         }
     }
 }

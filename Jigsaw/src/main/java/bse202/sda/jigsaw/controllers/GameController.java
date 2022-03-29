@@ -30,7 +30,7 @@ public class GameController implements Initializable {
     @FXML
     public Pane pane;
     @FXML
-    public VBox mainBox;
+    public HBox mainBox;
     @FXML
     public HBox figuresSpawn;
 
