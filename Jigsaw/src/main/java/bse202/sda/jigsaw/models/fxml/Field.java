@@ -7,6 +7,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,8 +85,15 @@ public class Field extends GridPane {
         for (int i = 0; i < getRows(); i++) {
             grid.add(new ArrayList<>());
             for (int j = 0; j < getColumns(); j++) {
+                Color primaryColor;
+                if (i < 6 && i > 2 && (j < 3 || j > 5)
+                        || j < 6 && j > 2 && (i < 3 || i > 5)) {
+                    primaryColor = gameColors.SmoothWhite();
+                } else {
+                    primaryColor = Color.WHITE;
+                }
                 Cell box = new Cell(new IntPoint(i, j), getCellSize(), getCellSize(),
-                        gameColors.SmoothWhite(),
+                        primaryColor,
                         gameColors.LightGreen(),
                         gameColors.SmoothBlue(),
                         gameColors.BasicPink(),

@@ -88,14 +88,14 @@ public class Cell extends Rectangle {
         private void OnDragEntered(MouseEvent e) {
             if (checkBeforePlace()) {
                 takeFigureOnField((x, y) -> field.getGrid().get(x)
-                        .get(y).setFill(successColor));
+                        .get(y).setFill(field.getGrid().get(x).get(y).successColor));
             } else {
                 takeFigureOnField((x, y) -> {
                     Cell cell = field.getGrid().get(x).get(y);
                     if (cell.IsFilled()) {
-                        cell.setFill(intersectColor);
+                        cell.setFill(cell.intersectColor);
                     } else {
-                        cell.setFill(dangerColor);
+                        cell.setFill(cell.dangerColor);
                     }
                 });
             }
@@ -105,9 +105,9 @@ public class Cell extends Rectangle {
             takeFigureOnField((x, y) -> {
                 Cell cell = field.getGrid().get(x).get(y);
                 if (cell.IsFilled()) {
-                    cell.setFill(filledColor);
+                    cell.setFill(cell.filledColor);
                 } else {
-                    cell.setFill(initialColor);
+                    cell.setFill(cell.initialColor);
                 }
             });
         }
