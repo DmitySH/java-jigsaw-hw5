@@ -20,17 +20,17 @@
         <URL value="@css/styles.css"/>
     </stylesheets>
     <VBox>
-        <Pane fx:id="pane" prefWidth="560" maxWidth="560" minWidth="560" maxHeight="560">
-            <Field fx:id="field" id="field" rows="9" columns="9" cellSize="60"/>
+        <Pane fx:id="pane" prefWidth="470" maxWidth="470" minWidth="470" maxHeight="470">
+            <Field fx:id="field" id="field" rows="9" columns="9" cellSize="50"/>
         </Pane>
-        <HBox prefWidth="560" maxWidth="560" minWidth="560"
+        <HBox prefWidth="470" maxWidth="470" minWidth="470"
               prefHeight="200" maxHeight="200" minHeight="200"
               fx:id="figuresSpawn"
               alignment="CENTER">
         </HBox>
     </VBox>
 
-    <VBox alignment="TOP_CENTER" style="-fx-padding: 240 60 10 60; -fx-spacing: 30">
+    <VBox alignment="TOP_CENTER" style="-fx-padding: 140 60 10 60; -fx-spacing: 30">
         <HBox spacing="50" alignment="CENTER">
             <HBox>
                 <ImageView fx:id="minutes1"/>

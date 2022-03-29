@@ -57,7 +57,7 @@ public class GameController implements Initializable {
 
         for (Figure.FigureType type :
                 Figure.FigureType.values()) {
-            figures.add(new Figure(type, 60, GameColors.getInstance().SmoothBlue()));
+            figures.add(new Figure(type, 50, GameColors.getInstance().SmoothBlue()));
             Dragger dg = new Dragger(figures.get(figures.size() - 1));
         }
 
