@@ -1,5 +1,6 @@
 package bse202.sda.jigsaw.models.fxml;
 
+import bse202.sda.jigsaw.interfaces.Action;
 import bse202.sda.jigsaw.interfaces.CoordinateTransfer;
 import bse202.sda.jigsaw.utils.IntPoint;
 import bse202.sda.jigsaw.utils.Rotater2D;
@@ -18,6 +19,10 @@ import java.util.Optional;
  * Figure class.
  */
 public class Figure extends Group implements CoordinateTransfer {
+    public static final int HALF_RIGHT_ROTATE = 90;
+    public static final int INVERSE_ROTATE = 180;
+    public static final int HALF_LEFT_ROTATE = 270;
+
     /**
      * All figure types.
      */
@@ -85,184 +90,52 @@ public class Figure extends Group implements CoordinateTransfer {
 
         switch (type) {
             case FIRST -> figureFirst(0);
-            case FIRST90 -> {
-                figureFirst(0);
-                setRotate(90);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(90, point);
-                }
-            }
-            case FIRST180 -> {
-                figureFirst(0);
-                setRotate(180);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(180, point);
-                }
-            }
-            case FIRST270 -> {
-                figureFirst(0);
-                setRotate(270);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(270, point);
-                }
-            }
+            case FIRST90 -> rotateFigure(() -> figureFirst(0), HALF_RIGHT_ROTATE);
+            case FIRST180 -> rotateFigure(() -> figureFirst(0), INVERSE_ROTATE);
+            case FIRST270 -> rotateFigure(() -> figureFirst(0), HALF_LEFT_ROTATE);
+
             case FIRST_REFLECTED -> figureFirst(1);
-            case FIRST_REFLECTED90 -> {
-                figureFirst(1);
-                setRotate(90);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(90, point);
-                }
-            }
-            case FIRST_REFLECTED180 -> {
-                figureFirst(1);
-                setRotate(180);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(180, point);
-                }
-            }
-            case FIRST_REFLECTED270 -> {
-                figureFirst(1);
-                setRotate(270);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(270, point);
-                }
-            }
+            case FIRST_REFLECTED90 -> rotateFigure(() -> figureFirst(1), HALF_RIGHT_ROTATE);
+            case FIRST_REFLECTED180 -> rotateFigure(() -> figureFirst(1), INVERSE_ROTATE);
+            case FIRST_REFLECTED270 -> rotateFigure(() -> figureFirst(1), HALF_LEFT_ROTATE);
+
             case SECOND -> figureSecond(0);
             case SECOND_REFLECTED -> figureSecond(1);
+            case SECOND90 -> rotateFigure(() -> figureSecond(0), HALF_RIGHT_ROTATE);
+            case SECOND_REFLECTED90 -> rotateFigure(() -> figureSecond(1), HALF_RIGHT_ROTATE);
 
-            case SECOND90 -> {
-                figureSecond(0);
-                setRotate(90);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(90, point);
-                }
-            }
-            case SECOND_REFLECTED90 -> {
-                figureSecond(1);
-                setRotate(90);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(90, point);
-                }
-            }
             case THIRD -> figureThird(2);
-            case THIRD90 -> {
-                figureThird(2);
-                setRotate(90);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(90, point);
-                }
-            }
-            case THIRD180 -> {
-                figureThird(2);
-                setRotate(180);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(180, point);
-                }
-            }
-            case THIRD270 -> {
-                figureThird(2);
-                setRotate(270);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(270, point);
-                }
-            }
+            case THIRD90 -> rotateFigure(() -> figureThird(2), HALF_RIGHT_ROTATE);
+            case THIRD180 -> rotateFigure(() -> figureThird(2), INVERSE_ROTATE);
+            case THIRD270 -> rotateFigure(() -> figureThird(2), HALF_LEFT_ROTATE);
+
             case FOURTH -> figureThird(1);
-            case FOURTH90 -> {
-                figureThird(1);
-                setRotate(90);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(90, point);
-                }
-            }
-            case FOURTH180 -> {
-                figureThird(1);
-                setRotate(180);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(180, point);
-                }
-            }
-            case FOURTH270 -> {
-                figureThird(1);
-                setRotate(270);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(270, point);
-                }
-            }
+            case FOURTH90 -> rotateFigure(() -> figureThird(1), HALF_RIGHT_ROTATE);
+            case FOURTH180 -> rotateFigure(() -> figureThird(1), INVERSE_ROTATE);
+            case FOURTH270 -> rotateFigure(() -> figureThird(1), HALF_LEFT_ROTATE);
+
             case FIFTH -> figureFifth();
-            case FIFTH90 -> {
-                figureFifth();
-                setRotate(90);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(90, point);
-                }
-            }
+            case FIFTH90 -> rotateFigure(this::figureFifth, HALF_RIGHT_ROTATE);
             case SIXTH -> figureSixth();
+
             case SEVENTH -> figureSeventh();
-            case SEVENTH90 -> {
-                figureSeventh();
-                setRotate(90);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(90, point);
-                }
-            }
-            case SEVENTH180 -> {
-                figureSeventh();
-                setRotate(180);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(180, point);
-                }
-            }
-            case SEVENTH270 -> {
-                figureSeventh();
-                setRotate(270);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(270, point);
-                }
-            }
+            case SEVENTH90 -> rotateFigure(this::figureSeventh, HALF_RIGHT_ROTATE);
+            case SEVENTH180 -> rotateFigure(this::figureSeventh, INVERSE_ROTATE);
+            case SEVENTH270 -> rotateFigure(this::figureSeventh, HALF_LEFT_ROTATE);
+
             case EIGHTH -> figureEighth();
-            case EIGHTH90 -> {
-                figureEighth();
-                setRotate(90);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(90, point);
-                }
-            }
-            case EIGHTH180 -> {
-                figureEighth();
-                setRotate(180);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(180, point);
-                }
-            }
-            case EIGHTH270 -> {
-                figureEighth();
-                setRotate(270);
-                for (IntPoint point :
-                        coordinates.values()) {
-                    rotater.rotate(270, point);
-                }
-            }
+            case EIGHTH90 -> rotateFigure(this::figureEighth, HALF_RIGHT_ROTATE);
+            case EIGHTH180 -> rotateFigure(this::figureEighth, INVERSE_ROTATE);
+            case EIGHTH270 -> rotateFigure(this::figureEighth, HALF_LEFT_ROTATE);
+        }
+    }
+
+    private void rotateFigure(Action figureCreator, int angle) {
+        figureCreator.execute();
+        setRotate(angle);
+        for (IntPoint point :
+                coordinates.values()) {
+            rotater.rotate(angle, point);
         }
     }
 
@@ -272,23 +145,13 @@ public class Figure extends Group implements CoordinateTransfer {
      * @param offset to x.
      */
     private void figureFirst(int offset) {
-        for (int i = 0; i < 2; i++) {
-            Rectangle r = createRectangle();
-            r.setX(rectSize * i);
-            coordinates.put(r, new IntPoint((int) r.getX() / rectSize,
-                    (int) r.getY() / rectSize));
-            this.getChildren().add(r);
-        }
+        horizontalLine();
 
         for (int i = 1; i < 3; i++) {
-            Rectangle r = createRectangle();
-            r.setX(rectSize * offset);
-            r.setY(rectSize * i);
-            coordinates.put(r, new IntPoint((int) r.getX() / rectSize,
-                    (int) r.getY() / rectSize));
-            this.getChildren().add(r);
+            verticalLine(offset, i);
         }
     }
+
 
     /**
      * Creates second figure.
@@ -297,12 +160,7 @@ public class Figure extends Group implements CoordinateTransfer {
      */
     private void figureSecond(int offset) {
         for (int i = 0; i < 2; i++) {
-            Rectangle r = createRectangle();
-            r.setX(offset * rectSize);
-            r.setY(rectSize * i);
-            coordinates.put(r, new IntPoint((int) r.getX() / rectSize,
-                    (int) r.getY() / rectSize));
-            this.getChildren().add(r);
+            verticalLine(offset, i);
         }
 
         for (int i = 1; i < 3; i++) {
@@ -331,9 +189,32 @@ public class Figure extends Group implements CoordinateTransfer {
         }
 
         for (int i = 0; i < 2; i++) {
+            verticalLine(offset, i);
+        }
+    }
+
+    /**
+     * Draws vertical line
+     *
+     * @param offset offset.
+     * @param i      current position.
+     */
+    private void verticalLine(int offset, int i) {
+        Rectangle r = createRectangle();
+        r.setX(rectSize * offset);
+        r.setY(rectSize * i);
+        coordinates.put(r, new IntPoint((int) r.getX() / rectSize,
+                (int) r.getY() / rectSize));
+        this.getChildren().add(r);
+    }
+
+    /**
+     * Draws horizontal line.
+     */
+    private void horizontalLine() {
+        for (int i = 0; i < 2; i++) {
             Rectangle r = createRectangle();
-            r.setX(offset * rectSize);
-            r.setY(rectSize * i);
+            r.setX(i * rectSize);
             coordinates.put(r, new IntPoint((int) r.getX() / rectSize,
                     (int) r.getY() / rectSize));
             this.getChildren().add(r);
@@ -367,13 +248,7 @@ public class Figure extends Group implements CoordinateTransfer {
      * Creates seventh figure.
      */
     private void figureSeventh() {
-        for (int i = 0; i < 2; i++) {
-            Rectangle r = createRectangle();
-            r.setX(i * rectSize);
-            coordinates.put(r, new IntPoint((int) r.getX() / rectSize,
-                    (int) r.getY() / rectSize));
-            this.getChildren().add(r);
-        }
+        horizontalLine();
 
         Rectangle r = createRectangle();
         r.setY(rectSize);
