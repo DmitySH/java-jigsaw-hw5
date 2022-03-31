@@ -1,13 +1,10 @@
 package bse202.sda.jigsaw.models.fxml;
 
-import bse202.sda.jigsaw.recources.GameColors;
-import bse202.sda.jigsaw.utils.IntPoint;
 import javafx.beans.NamedArg;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,37 +127,7 @@ public class Field extends GridPane {
         setColumns(columns);
         setCellSize(cellSize);
         grid = new ArrayList<>();
-
         this.setSnapToPixel(false);
-        initGrid();
-    }
-
-    /**
-     * Initializes field.
-     */
-    private void initGrid() {
-        GameColors gameColors = GameColors.getInstance();
-        for (int i = 0; i < getRows(); i++) {
-            grid.add(new ArrayList<>());
-            for (int j = 0; j < getColumns(); j++) {
-                Color primaryColor;
-                if (i < 6 && i > 2 && (j < 3 || j > 5)
-                        || j < 6 && j > 2 && (i < 3 || i > 5)) {
-                    primaryColor = gameColors.SmoothWhite();
-                } else {
-                    primaryColor = Color.WHITE;
-                }
-                Cell box = new Cell(new IntPoint(i, j), getCellSize(), getCellSize(),
-                        primaryColor,
-                        gameColors.LightGreen(),
-                        gameColors.SmoothBlue(),
-                        gameColors.BasicPink(),
-                        gameColors.DangerRed(),
-                        this);
-                grid.get(grid.size() - 1).add(box);
-                this.add(box, i, j);
-            }
-        }
     }
 
     /**

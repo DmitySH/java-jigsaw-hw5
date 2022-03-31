@@ -1,10 +1,10 @@
 package bse202.sda.jigsaw.utils;
 
 import bse202.sda.jigsaw.JigsawGame;
+import bse202.sda.jigsaw.interfaces.Action;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -18,15 +18,11 @@ import java.util.Objects;
  */
 public class Timer {
     private static final int SEC_IN_MIN = 60;
-    private static final int BASE = 10;
+    public static final int BASE = 10;
 
+    private Action actionOnTick;
     private int currentSeconds;
     private Timeline timeline;
-
-    private final ImageView minutes1;
-    private final ImageView minutes2;
-    private final ImageView seconds1;
-    private final ImageView seconds2;
 
     private final ArrayList<Image> digits;
 
@@ -58,15 +54,10 @@ public class Timer {
             digits.add(image);
         }
 
-        minutes1 = iv1;
-        minutes2 = iv2;
-        seconds1 = iv3;
-        seconds2 = iv4;
-
-        minutes1.setImage(digits.get(getMinutes() / BASE));
-        minutes2.setImage(digits.get(getMinutes() % BASE));
-        seconds1.setImage(digits.get(getSeconds() / BASE));
-        seconds2.setImage(digits.get(getSeconds() % BASE));
+        iv1.setImage(digits.get(getMinutes() / BASE));
+        iv2.setImage(digits.get(getMinutes() % BASE));
+        iv3.setImage(digits.get(getSeconds() / BASE));
+        iv4.setImage(digits.get(getSeconds() % BASE));
     }
 
     /**
@@ -106,21 +97,28 @@ public class Timer {
      */
     private void initTimer() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1),
-                this::tick));
+                e -> {
+                    ++currentSeconds;
+                    actionOnTick.execute();
+                }));
         timeline.setCycleCount(Animation.INDEFINITE);
     }
 
     /**
-     * Every tick handler.
+     * Sets tick action.
      *
-     * @param e event.
+     * @param actionOnTick action on tick.
      */
-    private void tick(ActionEvent e) {
-        ++currentSeconds;
+    public void setActionOnTick(Action actionOnTick) {
+        this.actionOnTick = actionOnTick;
+    }
 
-        minutes1.setImage(digits.get(getMinutes() / BASE));
-        minutes2.setImage(digits.get(getMinutes() % BASE));
-        seconds1.setImage(digits.get(getSeconds() / BASE));
-        seconds2.setImage(digits.get(getSeconds() % BASE));
+    /**
+     * Gets digits list.
+     *
+     * @return digits.
+     */
+    public ArrayList<Image> getDigits() {
+        return digits;
     }
 }
