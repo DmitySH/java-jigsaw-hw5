@@ -10,6 +10,8 @@ public class GameColors {
     private final Color smoothBlue;
     private final Color smoothWhite;
     private final Color basicPink;
+    private final Color darkBlue;
+
 
     /**
      * Resource class for game colors.
@@ -19,6 +21,7 @@ public class GameColors {
         dangerRed = Color.rgb(227, 18, 14);
         smoothBlue = Color.rgb(0, 149, 182);
         smoothWhite = Color.rgb(228, 231, 240);
+        darkBlue = Color.rgb(0, 33, 55);
         basicPink = Color.PINK;
     }
 
@@ -50,4 +53,7 @@ public class GameColors {
         return basicPink;
     }
 
+    public Color getDarkBlue() {
+        return darkBlue;
+    }
 }

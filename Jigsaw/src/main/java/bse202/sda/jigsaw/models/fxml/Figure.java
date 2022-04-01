@@ -2,6 +2,7 @@ package bse202.sda.jigsaw.models.fxml;
 
 import bse202.sda.jigsaw.interfaces.Action;
 import bse202.sda.jigsaw.interfaces.CoordinateTransfer;
+import bse202.sda.jigsaw.recources.GameColors;
 import bse202.sda.jigsaw.utils.IntPoint;
 import bse202.sda.jigsaw.utils.Rotater2D;
 import javafx.scene.Group;
@@ -286,7 +287,7 @@ public class Figure extends Group implements CoordinateTransfer {
         Rectangle r = new Rectangle(rectSize, rectSize, rectColor);
         r.setStrokeType(StrokeType.CENTERED);
         r.setStrokeWidth(2);
-        r.setStroke(Color.rgb(0, 33, 55));
+        r.setStroke(GameColors.getInstance().getDarkBlue());
         r.addEventFilter(MouseEvent.MOUSE_PRESSED,
                 e -> calculateCoordinatesFromRectangle(r));
         return r;
