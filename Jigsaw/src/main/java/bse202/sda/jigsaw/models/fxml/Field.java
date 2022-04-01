@@ -52,7 +52,7 @@ public class Field extends GridPane {
     private IntegerProperty columns;
 
     /**
-     * Number of collumns.
+     * Number of columns.
      *
      * @return number of rows.
      */

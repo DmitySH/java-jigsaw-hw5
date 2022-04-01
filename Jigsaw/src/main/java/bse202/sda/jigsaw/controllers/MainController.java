@@ -51,7 +51,7 @@ public class MainController implements Initializable {
         Stage newWindow = new Stage();
 
         try {
-            Scene gameScene = new Scene(fxmlLoader.load(), 1280, 680);
+            Scene gameScene = new Scene(fxmlLoader.load(), 960, 580);
             gameScene.getStylesheets().add(Objects.requireNonNull(JigsawGame.class
                     .getResource("views/css/styles.css")).toExternalForm());
 

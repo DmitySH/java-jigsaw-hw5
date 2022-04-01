@@ -20,10 +20,10 @@
         <URL value="@css/styles.css"/>
     </stylesheets>
     <VBox>
-        <Pane fx:id="pane" prefWidth="470" maxWidth="470" minWidth="470" maxHeight="470">
-            <Field fx:id="field" id="field" rows="9" columns="9" cellSize="50"/>
+        <Pane fx:id="pane" prefWidth="380" maxWidth="380" minWidth="380" maxHeight="380">
+            <Field fx:id="field" id="field" rows="9" columns="9" cellSize="40"/>
         </Pane>
-        <HBox prefWidth="470" maxWidth="470" minWidth="470"
+        <HBox prefWidth="380" maxWidth="380" minWidth="380"
               prefHeight="200" maxHeight="200" minHeight="200"
               fx:id="figuresSpawn"
               alignment="CENTER">

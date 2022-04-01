@@ -24,7 +24,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,6 +31,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
+    private static final int TIMER_SIZE = 70;
     @FXML
     public Field field;
     @FXML
@@ -76,7 +76,7 @@ public class GameController implements Initializable {
 
         for (Figure.FigureType type :
                 Figure.FigureType.values()) {
-            figures.add(new Figure(type, 50, GameColors.getInstance().SmoothBlue()));
+            figures.add(new Figure(type, 40, GameColors.getInstance().SmoothBlue()));
             Dragger dg = new Dragger(figures.get(figures.size() - 1));
             dg.setDraggableProperty(true);
         }
@@ -260,14 +260,14 @@ public class GameController implements Initializable {
      * Starts timer.
      */
     private void startTimer() {
-        minutes1.setFitHeight(80);
-        minutes1.setFitWidth(80);
-        minutes2.setFitHeight(80);
-        minutes2.setFitWidth(80);
-        seconds1.setFitHeight(80);
-        seconds1.setFitWidth(80);
-        seconds2.setFitHeight(80);
-        seconds2.setFitWidth(80);
+        minutes1.setFitHeight(TIMER_SIZE);
+        minutes1.setFitWidth(TIMER_SIZE);
+        minutes2.setFitHeight(TIMER_SIZE);
+        minutes2.setFitWidth(TIMER_SIZE);
+        seconds1.setFitHeight(TIMER_SIZE);
+        seconds1.setFitWidth(TIMER_SIZE);
+        seconds2.setFitHeight(TIMER_SIZE);
+        seconds2.setFitWidth(TIMER_SIZE);
 
         timer = new Timer(0,
                 minutes1, minutes2, seconds1, seconds2);
