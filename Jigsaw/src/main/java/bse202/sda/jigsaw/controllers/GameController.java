@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -271,17 +272,29 @@ public class GameController implements Initializable {
         timer = new Timer(0,
                 minutes1, minutes2, seconds1, seconds2);
         timer.setActionOnTick(this::tickOfTimer);
+        timer.setActionOnTooLong(this::tooLongTimerAction);
         timer.start();
     }
 
     /**
-     * Stops current game and shows stat.
-     *
-     * @param e event.
+     * Happens if play too long.
      */
-    public void endGame(ActionEvent e) {
-        timer.stop();
+    private void tooLongTimerAction() {
+        Alert alert = createInfoAlert();
+        alert.setContentText("You were playing too long... relax...");
+        alert.setOnHidden(e -> {
+            Stage stage = (Stage) (stopButton.getScene().getWindow());
+            stage.close();
+        });
+        alert.show();
+    }
 
+    /**
+     * Creates alert with info.
+     *
+     * @return alert with info.
+     */
+    private Alert createInfoAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game info");
         alert.setHeaderText(String.format(
@@ -294,6 +307,18 @@ public class GameController implements Initializable {
                 spawner.getTotalSpawns() - 1, calculateNumberOfFilled(),
                 field.getRows() * field.getColumns()
         ));
+        return alert;
+    }
+
+    /**
+     * Stops current game and shows stat.
+     *
+     * @param e event.
+     */
+    public void endGame(ActionEvent e) {
+        timer.stop();
+
+        Alert alert = createInfoAlert();
         alert.showAndWait();
 
         Stage stage = (Stage) (stopButton.getScene().getWindow());

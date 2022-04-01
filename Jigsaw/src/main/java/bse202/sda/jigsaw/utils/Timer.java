@@ -19,8 +19,11 @@ import java.util.Objects;
 public class Timer {
     private static final int SEC_IN_MIN = 60;
     public static final int BASE = 10;
+    private static final int MAX_SECONDS = SEC_IN_MIN * 99 + 58;
 
     private Action actionOnTick;
+    private Action actionOnTooLong;
+
     private int currentSeconds;
     private Timeline timeline;
 
@@ -99,6 +102,10 @@ public class Timer {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1),
                 e -> {
                     ++currentSeconds;
+                    if (currentSeconds > MAX_SECONDS) {
+                        this.stop();
+                        actionOnTooLong.execute();
+                    }
                     actionOnTick.execute();
                 }));
         timeline.setCycleCount(Animation.INDEFINITE);
@@ -111,6 +118,16 @@ public class Timer {
      */
     public void setActionOnTick(Action actionOnTick) {
         this.actionOnTick = actionOnTick;
+    }
+
+
+    /**
+     * Sets tick on long time timer.
+     *
+     * @param actionOnTooLong action to execute.
+     */
+    public void setActionOnTooLong(Action actionOnTooLong) {
+        this.actionOnTooLong = actionOnTooLong;
     }
 
     /**
